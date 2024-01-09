@@ -4,15 +4,17 @@ import 'package:provider/provider.dart';
 
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => ApiProvider(),
-      child: MaterialApp(
+      child: const MaterialApp(
         title: 'Flutter Isolate Example',
         home: MyHomePage(),
       ),
@@ -21,11 +23,13 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Isolate Example'),
+        title: const Text('Flutter Isolate Example'),
       ),
       body: Center(
         child: Column(
@@ -49,7 +53,7 @@ class MyHomePage extends StatelessWidget {
             Consumer<ApiProvider>(
               builder: (context, apiProvider, child) {
                 if (apiProvider.timerValue == null) {
-                  return Text('Press the button to start the timer.');
+                  return const Text('Press the button to start the timer.');
                 } else {
                   return Text('Timer Value: ${apiProvider.timerValue}');
                 }
@@ -64,7 +68,7 @@ class MyHomePage extends StatelessWidget {
             Consumer<ApiProvider>(
               builder: (context, apiProvider, child) {
                 if (apiProvider.apiResponse.isEmpty) {
-                  return Text('Press the button to fetch data.');
+                  return const Text('Press the button to fetch data.');
                 } else {
                   return Expanded(
                     child: ListView.builder(
@@ -85,3 +89,4 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
+

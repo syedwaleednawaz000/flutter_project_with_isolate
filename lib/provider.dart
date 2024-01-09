@@ -6,17 +6,14 @@ import 'package:http/http.dart' as http;
 
 class ApiProvider extends ChangeNotifier {
   static const String _apiUrl = 'https://jsonplaceholder.typicode.com/posts';
-
   List<String> _apiResponse = [];
   List<String> get apiResponse => _apiResponse;
 
   Future<void> fetchData() async {
     ReceivePort receivePort = ReceivePort();
     await Isolate.spawn(_fetchDataIsolate, receivePort.sendPort);
-
     SendPort sendPort = await receivePort.first;
     List<String> result = await _sendReceive(sendPort, 'fetchData');
-
     _apiResponse = result;
     notifyListeners();
   }
@@ -28,7 +25,6 @@ class ApiProvider extends ChangeNotifier {
     await for (var msg in receivePort) {
       SendPort replyTo = msg[0];
       String command = msg[1];
-
       if (command == 'fetchData') {
         List<String> data = await _fetchData();
         replyTo.send(data);

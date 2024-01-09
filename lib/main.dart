@@ -63,7 +63,7 @@ class MyHomePage extends StatelessWidget {
               onPressed: () {
                 context.read<ApiProvider>().fetchData();
               },
-              child: Text('Fetch Data'),
+              child: const Text('Fetch Data'),
             ),
             Consumer<ApiProvider>(
               builder: (context, apiProvider, child) {
